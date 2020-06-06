@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}
+Hello :P :D :P
+{% endblock %}
+{% block body %}
+    {% if name %}
+        <h1>Hello {{ name }}! :P</h1>
+    {% else %}
+        <form action="" method="post">
+            {% csrf_token %}
+            <input type="text" name="name">
+            <input type="submit" value="send">
+        </form>
+    {% endif %}
+{% endblock %}
