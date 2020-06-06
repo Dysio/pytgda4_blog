@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block body %}
+    {% if messages %}
+        {% for message in messages %}
+            <div>
+                {% autoescape off %}
+                    {{ message }}
+                {% endautoescape %}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="username">
+        <input type="email" name="email" placeholder="email">
+        <input type="password" name="password" placeholder="password">
+        <input type="password" name="password_second">
+        <input type="submit" value="register">
+    </form>
+{% endblock %}
