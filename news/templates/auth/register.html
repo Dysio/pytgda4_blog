@@ -2,9 +2,9 @@
 {% block body %}
     {% if messages %}
         {% for message in messages %}
-            <div>
+            <div class="{{ message.tags }}">
                 {% autoescape off %}
-                    {{ message }}
+                    {{ message.tags|capfirst }} {{ message }}
                 {% endautoescape %}
             </div>
         {% endfor %}
