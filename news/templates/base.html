@@ -9,6 +9,9 @@
 
 {% if user.is_authenticated %}
     Witaj {{ user.username }}, <a href="{% url 'logout' %}">wyloguj</a>
+{% else %}
+    <a href="{% url 'register' %}">rejestruj</a>
+    <a href="{% url 'login' %}">zaloguj</a>
 {% endif %}
 
 {% block body %}{% endblock %}
