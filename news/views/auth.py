@@ -1,13 +1,10 @@
 """copyright (c) 2020 Beeflow Ltd.
 
 Author Rafal Przetakowski <rafal.p@beeflow.co.uk>"""
-from typing import List
 
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django.db import IntegrityError
-from django.http import HttpRequest
 from django.shortcuts import render, redirect
 from django.views import View
 

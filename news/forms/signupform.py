@@ -16,7 +16,7 @@ class SignUpForm(UserCreationForm):
     )
     email = forms.EmailField(
         max_length=254, label='Email',
-        widget=forms.TextInput(attrs={'class': 'form-control form-control-lg pr-4 shadow-none'})
+        widget=forms.EmailInput(attrs={'class': 'form-control form-control-lg pr-4 shadow-none'})
     )
     password1 = forms.CharField(
         label='Hasło',
