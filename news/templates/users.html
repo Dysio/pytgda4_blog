@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block body %}
+    {% include 'globals/messages.html' %}
+    <h1>{{ bleble }}</h1>
+    <ul>
+        {% for user in object_list %}
+            <li>{{ user.username }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -3,6 +3,8 @@
 Hello :P :D :P
 {% endblock %}
 {% block body %}
+    {%  include 'globals/messages.html' %}
+
     {% if name %}
         <h1>Hello {{ name }}! :P</h1>
     {% else %}

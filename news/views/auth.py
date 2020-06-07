@@ -6,28 +6,33 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views import View
+from django.views.generic import CreateView, ListView
 
 from news.forms.loginform import LoginForm
 from news.forms.signupform import SignUpForm
 
 
-class RegisterView(View):
+class UsersView(ListView):
+    template_name = 'users.html'
+    model = User
+
+    def get_queryset(self):
+        return User.objects.filter(is_superuser=False)
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(UsersView, self).get_context_data(object_list=None, **kwargs)
+        context.update({'bleble': 'cokolwiek'})
+        return context
+
+
+class RegisterView(CreateView):
     template_name: str = 'auth/register.html'
+    form_class = SignUpForm
 
-    def get(self, request):
-        if request.user.is_authenticated:
-            return redirect('index')
-
-        return render(request, self.template_name, {'form': SignUpForm()})
-
-    def post(self, request):
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, f'Użytkownik {request.POST.get("username")} został utworzony.')
-
-        return redirect('register')
+    def get_success_url(self):
+        return reverse('index')
 
 
 class LoginView(View):
