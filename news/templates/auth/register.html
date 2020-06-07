@@ -4,10 +4,11 @@
 
     <form action="" method="post">
         {% csrf_token %}
-        <input type="text" name="username" placeholder="username">
-        <input type="email" name="email" placeholder="email">
-        <input type="password" name="password" placeholder="password">
-        <input type="password" name="password_second">
+        {{ form }}
+{#        Jak się dobrać do tych błędów? #}
+{#        {{ form.password1.errors }}#}
+{#        {{ form.password2.errors }}#}
+{#        {{ form.password_mismatch.errors }}#}
         <input type="submit" value="register">
     </form>
 {% endblock %}

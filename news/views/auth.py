@@ -12,6 +12,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 
 from news.forms.loginform import LoginForm
+from news.forms.signupform import SignUpForm
 
 
 class RegisterView(View):
@@ -21,22 +22,13 @@ class RegisterView(View):
         if request.user.is_authenticated:
             return redirect('index')
 
-        return render(request, self.template_name)
+        return render(request, self.template_name, {'form': SignUpForm()})
 
-    def post(self, request: HttpRequest):
-        if request.POST.get('password') != request.POST.get('password_second'):
-            messages.error(request, 'Hasła nie są identyczne :P')
-            return redirect('register')
-
-        username: str = request.POST.get('username')
-        email: str = request.POST.get('email')
-        password: str = request.POST.get('password')
-
-        try:
-            User.objects.create_user(username=username, email=email, password=password)
-            messages.success(request, f'Użytkownik {username} został utworzony.')
-        except IntegrityError:
-            messages.error(request, f'Użytkownik {username} już istnieje. Wybierz inną nazwę.')
+    def post(self, request):
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Użytkownik {request.POST.get("username")} został utworzony.')
 
         return redirect('register')
 
