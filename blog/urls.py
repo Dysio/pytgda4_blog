@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from news.views import MainView, RegisterView, LoginView, logout_view, UsersView
+from news.views import MainView, RegisterView, LoginView, logout_view, UsersView, UpdateUserView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +25,5 @@ urlpatterns = [
     path('login', LoginView.as_view(), name='login'),
     path('logout', logout_view, name='logout'),
     path('users', UsersView.as_view(), name='users'),
+    path('users/<pk>/edit', UpdateUserView.as_view(), name='update_user'),
 ]

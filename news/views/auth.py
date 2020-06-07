@@ -8,10 +8,19 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, UpdateView
 
 from news.forms.loginform import LoginForm
 from news.forms.signupform import SignUpForm
+
+
+class UpdateUserView(UpdateView):
+    template_name = 'updateuser.html'
+    model = User
+    fields = ('username', 'email')
+
+    def get_success_url(self):
+        return reverse('users')
 
 
 class UsersView(ListView):

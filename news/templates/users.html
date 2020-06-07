@@ -4,7 +4,7 @@
     <h1>{{ bleble }}</h1>
     <ul>
         {% for user in object_list %}
-            <li>{{ user.username }}</li>
+            <li>{{ user.username }} | <a href="{% url 'update_user' pk=user.id %}">edytuj</a></li>
         {% endfor %}
     </ul>
 {% endblock %}
