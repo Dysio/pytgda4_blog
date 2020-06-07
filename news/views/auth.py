@@ -11,6 +11,8 @@ from django.http import HttpRequest
 from django.shortcuts import render, redirect
 from django.views import View
 
+from news.forms.loginform import LoginForm
+
 
 class RegisterView(View):
     template_name: str = 'auth/register.html'
@@ -46,7 +48,7 @@ class LoginView(View):
         if request.user.is_authenticated:
             return redirect('index')
 
-        return render(request, self.template_name)
+        return render(request, self.template_name, {'form': LoginForm()})
 
     def post(self, request):
         username: str = request.POST.get('username')

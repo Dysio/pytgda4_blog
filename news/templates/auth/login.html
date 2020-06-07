@@ -4,8 +4,7 @@
 
     <form method="post">
         {% csrf_token %}
-        <input name="username" type="text" placeholder="Nazwa użytkownika">
-        <input name="password" type="password" placeholder="Hasło">
+        {{ form }}
         <input type="submit" value="zaloguj">
     </form>
 {% endblock %}
