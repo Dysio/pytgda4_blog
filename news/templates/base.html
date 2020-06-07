@@ -6,6 +6,11 @@
     {% block css %}{% endblock %}
 </head>
 <body>
+
+{% if user.is_authenticated %}
+    Witaj {{ user.username }}, <a href="{% url 'logout' %}">wyloguj</a>
+{% endif %}
+
 {% block body %}{% endblock %}
 {% block scripts %}{% endblock %}
 </body>

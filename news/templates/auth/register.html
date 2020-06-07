@@ -1,14 +1,6 @@
 {% extends 'base.html' %}
 {% block body %}
-    {% if messages %}
-        {% for message in messages %}
-            <div class="{{ message.tags }}">
-                {% autoescape off %}
-                    {{ message.tags|capfirst }} {{ message }}
-                {% endautoescape %}
-            </div>
-        {% endfor %}
-    {% endif %}
+    {% include 'globals/messages.html' %}
 
     <form action="" method="post">
         {% csrf_token %}
