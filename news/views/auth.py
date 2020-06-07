@@ -31,7 +31,7 @@ class UsersView(ListView):
         return User.objects.filter(is_superuser=False)
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(UsersView, self).get_context_data(object_list=None, **kwargs)
+        context = super(UsersView, self).get_context_data(object_list=object_list, **kwargs)
         context.update({'bleble': 'cokolwiek'})
         return context
 
