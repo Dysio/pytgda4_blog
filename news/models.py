@@ -26,3 +26,11 @@ class News(models.Model):
 
     class Meta:
         verbose_name_plural = 'News'
+
+
+class Tag(models.Model):
+    name = models.CharField(max_length=25, unique=True)
+    news = models.ManyToManyField(News, related_name='tags')
+
+    def __str__(self):
+        return self.name
