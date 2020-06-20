@@ -2,4 +2,4 @@
 
 Author Rafal Przetakowski <rafal.p@beeflow.co.uk>"""
 from .main_view import MainView
-from .auth import RegisterView, LoginView, logout_view, UsersView, UpdateUserView
+from .auth import RegisterView, LoginView, logout_view, UsersView, UpdateUserView, ChangePasswordView

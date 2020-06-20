@@ -4,6 +4,8 @@ Author Rafal Przetakowski <rafal.p@beeflow.co.uk>"""
 
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.urls import reverse
@@ -65,6 +67,31 @@ class LoginView(View):
 
         messages.error(request, 'Nie znam takiego usera :P')
         return redirect('login')
+
+
+class ChangePasswordView(View, LoginRequiredMixin):
+    login_url = '/login'
+    template_name = 'auth/change_password.html'
+    form_class = PasswordChangeForm
+
+    def get(self, request):
+        context = {'form': self.form_class(user=request.user)}
+        return render(request, self.template_name, context)
+
+    def post(self, request):
+        form = self.form_class(request.user, request.POST)
+
+        if form.is_valid():
+            return self.form_valid(form)
+
+        return self.form_invalid(form)
+
+    def form_valid(self, form):
+        messages.success(request=self.request, message="Hasło zmienione prawidłowo")
+        return redirect(reverse('index'))
+
+    def form_invalid(self, form):
+        return render(self.request, self.template_name, {"form": form})
 
 
 def logout_view(request):
