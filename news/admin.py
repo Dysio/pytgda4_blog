@@ -23,7 +23,7 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(models.News)
 class NewsAdmin(admin.ModelAdmin):
     # class TagsInline(admin.StackedInline):
-    #     model = models.Tag.through
+    #     model = models.Tag.through (?)
     #     extra = 1
 
     readonly_fields = ('id',)
