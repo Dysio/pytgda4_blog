@@ -88,6 +88,7 @@ class ChangePasswordView(View, LoginRequiredMixin):
 
     def form_valid(self, form):
         messages.success(request=self.request, message="Hasło zmienione prawidłowo")
+        form.save()
         return redirect(reverse('index'))
 
     def form_invalid(self, form):

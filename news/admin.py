@@ -22,13 +22,20 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(models.News)
 class NewsAdmin(admin.ModelAdmin):
-    # class TagsInline(admin.StackedInline):
-    #     model = models.Tag.through (?)
-    #     extra = 1
+    class TagsInline(admin.StackedInline):
+        """
+        Lista tagów wyświetlana od strony postów. Through jest o tyle istotne, że mówi admince django
+        o istnieniu relacji wiele-wiele.
+
+        Nie przejmujemy się także tym, że 'tags' jest oznaczone jako "unresolved attribute". Tags jest wirtualnym polem
+        opisanym jako "related_name" w modelu Tag
+        """
+        model = models.News.tags.through
+        extra = 1
 
     readonly_fields = ('id',)
     list_display = ('title', 'category')
-    # inlines = [TagsInline]
+    inlines = [TagsInline]
 
 
 @admin.register(models.Tag)
