@@ -15,12 +15,14 @@ class ListTextWidget(forms.TextInput):
         self.attrs.update({'list': 'list_%s' % self._name})
 
     def render(self, name, value, attrs=None, renderer=None):
+        # Przyda się do edycji (w naszym przypadku newsa)
         if self._model_object:
             try:
                 value = self._model_object.objects.get(id=value)
             except self._model_object.DoesNotExist:
                 pass
 
+        # tu jest generowane pole input typu text z klasy TextInput
         text_html = super(ListTextWidget, self).render(name, value, attrs=attrs, renderer=renderer)
 
         text_html += '<datalist id="list_%s">' % self._name
