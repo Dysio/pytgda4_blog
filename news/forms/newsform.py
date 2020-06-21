@@ -34,6 +34,11 @@ class NewsForm(forms.ModelForm):
         )
     )
 
+    def clean_category(self):
+        return Category.objects.get_or_create(
+            name=self.cleaned_data.get('category')
+        )[0]
+
     class Meta:
         model = News
         fields = ('title', 'content', 'category')
