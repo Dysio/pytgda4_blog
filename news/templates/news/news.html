@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block body %}
+    <h1>{{ object.title }}</h1>
+    <h5>{{ object.category }}</h5>
+    <p>{{ object.content }}</p>
+    <p><small>
+        {{ tags }}
+    </small></p>
+{% endblock %}

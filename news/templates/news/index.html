@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block body %}
+    {% include 'globals/messages.html' %}
+    <h1>Wiadomości ...</h1>
+    <a href="{% url 'add_news' %}">dodaj post</a>
+
+    <form action="{% url 'find_news' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="search_param">
+        <button type="submit">szukaj</button>
+    </form>
+
+    <ul>
+        {% for news in object_list %}
+            <li>
+                <a href="{% url 'show_news' news.id %}">{{ news.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

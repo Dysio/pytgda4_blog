@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 from news.views import MainView, RegisterView, LoginView, logout_view, UsersView, UpdateUserView, ChangePasswordView
+from news.views.news_view import NewsListView, ShowNewsView, AddNewsView, SearchNewsView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,5 +27,9 @@ urlpatterns = [
     path('logout', logout_view, name='logout'),
     path('users', UsersView.as_view(), name='users'),
     path('users/<pk>/edit', UpdateUserView.as_view(), name='update_user'),
-    path('change_password', ChangePasswordView.as_view(), name='change_password')
+    path('change_password', ChangePasswordView.as_view(), name='change_password'),
+    path('news', NewsListView.as_view(), name='news_list'),
+    path('news/add', AddNewsView.as_view(), name='add_news'),
+    path('news/search', SearchNewsView.as_view(), name='find_news'),
+    path('news/<pk>', ShowNewsView.as_view(), name='show_news'),
 ]
