@@ -7,7 +7,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView
-
+from django.db.models import Q
 from news.forms.newsform import NewsForm
 from news.models import News
 
@@ -53,8 +53,7 @@ class SearchNewsView(LoginRequiredMixin, View):
             return redirect(reverse('news_list'))
 
         news_list = News.objects.filter(
-            title__contains=search_param,
-            category__name__contains=search_param
+            Q(title__contains=search_param) | Q(category__name__contains=search_param)
         )
 
         return render(request, self.template_name, {"object_list": news_list})

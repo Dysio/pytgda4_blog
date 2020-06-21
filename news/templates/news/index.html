@@ -6,7 +6,7 @@
 
     <form action="{% url 'find_news' %}" method="post">
         {% csrf_token %}
-        <input type="text" name="search_param">
+        <input type="text" name="search_param" placeholder="tytuł lub nazwa kategorii">
         <button type="submit">szukaj</button>
     </form>
 
