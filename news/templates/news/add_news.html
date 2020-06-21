@@ -1,8 +1,4 @@
 {% extends 'base.html' %}
 {% block body %}
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="zapisz">
-    </form>
+    {% include 'globals/form.html' %}
 {% endblock %}

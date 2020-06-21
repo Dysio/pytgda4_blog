@@ -4,6 +4,7 @@ Author Rafal Przetakowski <rafal.p@beeflow.co.uk>"""
 from django import forms
 
 from news.form_widgets import ListTextWidget
+from news.forms.horizontalformhelper import HorizontalFormHelper
 from news.models import News, Category
 
 
@@ -42,3 +43,10 @@ class NewsForm(forms.ModelForm):
     class Meta:
         model = News
         fields = ('title', 'content', 'category')
+
+    def __init__(self, *args, **kwargs):
+        self.helper = HorizontalFormHelper()
+        super(NewsForm, self).__init__(*args, **kwargs)
+
+        self.helper.add_submit("Dodaj post")
+        self.helper.add_cancel("Anuluj")
