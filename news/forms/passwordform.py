@@ -25,7 +25,7 @@ class PasswordForm(PasswordChangeForm):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ('old_password', 'new_password1', 'new_password2')
 
     def __init__(self, *args, **kwargs):
         self.helper = HorizontalFormHelper()
