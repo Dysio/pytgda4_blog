@@ -42,5 +42,3 @@ class Login(models.Model):
     def __str__(self):
         return self.nick
 
-class Register(models.Model):
-    pass

@@ -11,6 +11,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
 from django.views.generic import CreateView, ListView, UpdateView
+from ..forms.passwordform import PasswordForm
 
 from news.forms.loginform import LoginForm
 from news.forms.signupform import SignUpForm
@@ -72,7 +73,7 @@ class LoginView(View):
 class ChangePasswordView(View, LoginRequiredMixin):
     login_url = '/login'
     template_name = 'auth/change_password.html'
-    form_class = PasswordChangeForm
+    form_class = PasswordForm
 
     def get(self, request):
         context = {'form': self.form_class(user=request.user)}
