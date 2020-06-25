@@ -34,3 +34,13 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
+
+class Login(models.Model):
+    nick = models.CharField(max_length=25, unique=True)
+    password = models.CharField(max_length=50, unique=False)
+
+    def __str__(self):
+        return self.nick
+
+class Register(models.Model):
+    pass

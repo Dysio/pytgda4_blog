@@ -4,6 +4,7 @@ Author Rafal Przetakowski <rafal.p@beeflow.co.uk>"""
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UsernameField
 from django.contrib.auth.models import User
+from news.forms.horizontalformhelper import HorizontalFormHelper
 
 
 class SignUpForm(UserCreationForm):
@@ -40,3 +41,10 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2')
+
+    def __init__(self, *args, **kwargs):
+        self.helper = HorizontalFormHelper()
+        super(SignUpForm, self).__init__(*args, **kwargs)
+
+        self.helper.add_submit("zarejestruj")
+

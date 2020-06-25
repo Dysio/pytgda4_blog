@@ -50,3 +50,4 @@ class NewsForm(forms.ModelForm):
 
         self.helper.add_submit("Dodaj post")
         self.helper.add_cancel("Anuluj")
+

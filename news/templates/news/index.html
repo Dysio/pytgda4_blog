@@ -8,6 +8,7 @@
         {% csrf_token %}
         <input type="text" name="search_param" placeholder="tytuł lub nazwa kategorii" value="">
         <button type="submit">szukaj</button>
+        <a href="{% url 'news_list'%}">anuluj</a>
     </form>
 
     <ul>
@@ -17,4 +18,28 @@
             </li>
         {% endfor %}
     </ul>
+
+    {% for news in page_obj %}
+
+        {{ news.full_name|upper }}<br>
+
+    {% endfor %}
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">poprzednia</a>
+            {% endif %}
+
+            <span class="current">
+                Strona {{ page_obj.number }} z {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">następna</a>
+            {% endif %}
+        </span>
+    </div>
+
+
 {% endblock %}
