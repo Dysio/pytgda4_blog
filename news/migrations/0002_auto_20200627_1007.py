@@ -26,7 +26,7 @@ def rollback_migrations(apps, schema_editor):
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('news', '0004_tag'),
+        ('news', '0001_initial'),
     ]
 
     operations = [

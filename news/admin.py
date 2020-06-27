@@ -46,4 +46,4 @@ class TagAdmin(admin.ModelAdmin):
 
     list_display = ('name', 'news_number')
 
-# admin.site.register(models.News, NewsAdmin)
+admin.site.register(models.Profile)

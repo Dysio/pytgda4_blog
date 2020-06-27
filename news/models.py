@@ -1,12 +1,14 @@
 import uuid
 
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
 class Category(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     name = models.CharField(max_length=50, null=False, blank=False)
-    parent_category = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+    parent_category = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True,
+                                        related_name='children')
 
     def __str__(self):
         return self.name
@@ -34,3 +36,11 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Profile(AbstractUser):
+    date_of_birth = models.DateField(null=True, blank=True, default=None)
+
+    def __str__(self):
+        """Returns string representation as first_name last_name."""
+        return '{} {} - {}'.format(self.last_name, self.first_name, self.username)
