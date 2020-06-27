@@ -3,7 +3,7 @@
 Author Rafal Przetakowski <rafal.p@beeflow.co.uk>"""
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UsernameField
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.core.validators import EmailValidator
 
 from news.validators import UsernameValidator
@@ -41,6 +41,16 @@ class SignUpForm(UserCreationForm):
             raise forms.ValidationError('Hasła nie są identyczne', code='password_mismatch')
 
         return password2
+
+    def save(self, commit=True):
+        user = super(SignUpForm, self).save(commit)
+
+        try:
+            group = Group.objects.get(name="Customer")
+            group.user_set.add(user)
+            group.save()
+        except Group.DoesNotExist:
+            pass
 
     class Meta:
         model = User
