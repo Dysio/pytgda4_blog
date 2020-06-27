@@ -4,6 +4,9 @@ Author Rafal Przetakowski <rafal.p@beeflow.co.uk>"""
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UsernameField
 from django.contrib.auth.models import User
+from django.core.validators import EmailValidator
+
+from news.validators import UsernameValidator
 
 
 class SignUpForm(UserCreationForm):
@@ -12,11 +15,13 @@ class SignUpForm(UserCreationForm):
         widget=forms.TextInput(
             attrs={'autofocus': True, 'class': 'form-control form-control-lg pr-4 shadow-none',
                    'placeholder': 'Nazwa użytkownika'},
-        )
+        ),
+        validators=[UsernameValidator]
     )
     email = forms.EmailField(
         max_length=254, label='Email',
-        widget=forms.EmailInput(attrs={'class': 'form-control form-control-lg pr-4 shadow-none'})
+        widget=forms.EmailInput(attrs={'class': 'form-control form-control-lg pr-4 shadow-none'}),
+        validators=[EmailValidator]
     )
     password1 = forms.CharField(
         label='Hasło',
