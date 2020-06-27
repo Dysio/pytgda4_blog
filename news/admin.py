@@ -46,4 +46,8 @@ class TagAdmin(admin.ModelAdmin):
 
     list_display = ('name', 'news_number')
 
-admin.site.register(models.Profile)
+
+@admin.register(models.Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ('image_tag', 'first_name', 'last_name', 'username')
+    readonly_fields = ('image_tag',)
