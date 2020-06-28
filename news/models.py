@@ -29,6 +29,16 @@ class News(models.Model):
     content = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='posts')
 
+    @property
+    def category_name(self):
+        return str(self.category)
+
+    @category_name.setter
+    def category_name(self, category_name: str):
+        """@todo - do ogarnięcia metoda PATCH z rest-api dla nazwy kategorii a nie jej instancji."""
+        if category_name != self.category.name:
+            self.category = Category.objects.get_or_create(name=category_name)[0]
+
     def __str__(self):
         return self.title
 
@@ -42,6 +52,7 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
+
 
 # pylint:disable=unused-argument
 def user_photo_name(instance, filename):

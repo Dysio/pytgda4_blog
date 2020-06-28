@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from blog import settings
 from news.views import MainView, RegisterView, LoginView, logout_view, UsersView, UpdateUserView, ChangePasswordView
@@ -23,6 +23,7 @@ from news.views.news_view import NewsListView, ShowNewsView, AddNewsView, Search
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     path('', MainView.as_view(), name='index'),
     path('register', RegisterView.as_view(), name='register'),
     path('login', LoginView.as_view(), name='login'),
@@ -34,4 +35,7 @@ urlpatterns = [
     path('news/add', AddNewsView.as_view(), name='add_news'),
     path('news/search', SearchNewsView.as_view(), name='find_news'),
     path('news/<pk>', ShowNewsView.as_view(), name='show_news'),
+
+    path("api/v1/", include("api.urls")),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
