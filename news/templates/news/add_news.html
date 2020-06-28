@@ -1,4 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block body %}
     {% include 'globals/form.html' %}
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'add_news.js' %}" id="news-script" data-csrftoken="{{ csrf_token }}"></script>
 {% endblock %}
