@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
-{% load is_word_in_string %}
-
+{% load static %}
 {% block body %}
     {% include 'globals/messages.html' %}
     <h1>Wiadomości ...</h1>
@@ -12,15 +11,19 @@
         <button type="submit">szukaj</button>
     </form>
 
-    <ul>
-        {% for news in object_list %}
-            <li>
-                {% if news.title|is_word_in_string:'dupa,blada' %}
-                    <a href="{% url 'show_news' news.id %}"><a class="btn btn-danger">+18</a>  {{ news.title }}</a>
-                {% else %}
-                    <a href="{% url 'show_news' news.id %}">{{ news.title }}</a>
-                {% endif %}
-            </li>
-        {% endfor %}
-    </ul>
+    <ul id="news_list">Loading ...</ul>
+    <div id="paginator"></div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"></script>
+    <script id="news-item" type="text/x-handlebars-template">
+        {% verbatim %}
+        <li id="{{ news_id }}">
+            <a href="{{ news_url }}">{{ news_title }}</a>
+        </li>
+        {% endverbatim %}
+    </script>
+    <script src="{% static 'main.js' %}" id="news-script" data-csrftoken="{{ csrf_token }}"></script>
 {% endblock %}
