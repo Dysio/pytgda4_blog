@@ -54,4 +54,31 @@ const showNews = data => {
         // dodajemy wyrenderowany rekord do bloku <UL>
         document.querySelector('#news_list').innerHTML += newsTemplate(news);
     }
+
+    // szablon dla paginacji
+    let paginatorTemplate = Handlebars.compile(document.querySelector('#paginator-item').innerHTML);
+    let paginatorData = {
+        // if ? true : false
+        'previous_page_url': data.previous ? data.previous : '#',
+        'next_page_url': data.next ? data.next : '#',
+        'elements': data.count
+    }
+    document.querySelector('#paginator').innerHTML = paginatorTemplate(paginatorData);
+
+    // dla każdego elementu, który ma klasę 'paginator'
+    document.querySelectorAll('.paginator').forEach(button => {
+        // zmieniam klasę elementu w zależności od zawartości atrybutu href
+        button.className = button.getAttribute('href') === '#'
+            ? 'paginator btn btn-success disabled'
+            : 'paginator btn btn-success';
+
+        // przechwytujemy event kliknięcia w przycisk
+        button.onclick = () => {
+            // Wywołuję funkcję do wczytywania listy newsów
+            loadNews(button.getAttribute('href'));
+
+            // konieczne do przerwania działania eventu. Inaczej przeglądarka przeniesie na wskazany url
+            return false;
+        }
+    });
 }

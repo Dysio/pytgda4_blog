@@ -25,5 +25,12 @@
         </li>
         {% endverbatim %}
     </script>
+    <script id="paginator-item" type="text/x-handlebars-template">
+        {% verbatim %}
+        <a href="{{ previous_page_url }}" class="paginator btn btn-success"> < </a>
+        &nbsp;news: {{ elements }}&nbsp;
+        <a href="{{ next_page_url }}" class="paginator btn btn-success"> > </a>
+        {% endverbatim %}
+    </script>
     <script src="{% static 'main.js' %}" id="news-script" data-csrftoken="{{ csrf_token }}"></script>
 {% endblock %}
