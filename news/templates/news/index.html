@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{#{% load is_word_in_string %}#}
+{% load is_word_in_string %}
 
 {% block body %}
     {% include 'globals/messages.html' %}
@@ -15,11 +15,11 @@
     <ul>
         {% for news in object_list %}
             <li>
-{#                {% if news.title|is_word_in_string 'dupa,blada' %}#}
-{#                    <a href="{% url 'show_news' news.id %}">+18 {{ news.title }}</a>#}
-{#                {% else %}#}
+                {% if news.title|is_word_in_string:'dupa,blada' %}
+                    <a href="{% url 'show_news' news.id %}"><a class="btn btn-danger">+18</a>  {{ news.title }}</a>
+                {% else %}
                     <a href="{% url 'show_news' news.id %}">{{ news.title }}</a>
-{#                {% endif %}#}
+                {% endif %}
             </li>
         {% endfor %}
     </ul>
